@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title></title>
+        <script type="text/javascript">
+        	/*
+        	 * this - value depends on the invocation format (in which place it is used)
+        	 * -------------------------------------------------------------
+        	 * Different places					this
+        	 * --------------------------------------------------------------
+        	 * Functions			-			the global object (in ES3), undefined (in ES5)
+        	 * Methods				-			the containing object
+        	 * Constructor			-			the created new object
+        	 * Apply/Call			-			object passed in as an argument
+        	 * --------------------------------------------------------------
+        	 */
+        	//This in a function
+        	function sampleFunction(){
+        		var sampleFunctionVar = 'Im variable inside sampleFunction';
+        		console.log(this + ' ' + this.sampleFunctionVar);
+        	}
+        	sampleFunction();
+        	
+        	//This in a Method
+        	var jaguarCar = {
+        		model: 'jaguar',
+        		color: 'red',
+        		type: 's-type',
+        		
+        		getColor: function(){
+        			console.log(this + ' ' + this.color);
+        		}
+        	};       	
+        	jaguarCar.getColor();
+        	
+        	//This in a Constructor
+        	function Car(model, color, type){
+        		this.model = model;
+        		this.color = color;
+        		this.type = type;
+        		
+        		this.getColor = function(){
+        			console.log(this + ' ' + this.color);
+        		}
+        	}
+        	var jaguar = new Car('jaguar', 'red', 's-type');
+        	var audi = new Car('audi', 'black', 'A8');
+        	
+        	jaguar.getColor();
+        	audi.getColor();
+        	
+        	//This in a Apply/Call
+        	var getColor = function(){
+        		console.log(this + ' ' + this.color);
+        	};
+        	
+        	getColor.apply(jaguar);
+        	getColor.apply(audi);
+        	
+        	getColor.call(jaguar);
+        	getColor.call(audi);
+        	
+        	
+        </script>
+    </head>
+    <body>
+        
+    </body>
+</html>

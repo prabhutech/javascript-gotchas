@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script type="text/javascript">
+        	
+        	// Defining a Constructor function to create Person 'Object type'
+        	var Person = function(firstName, lastName){
+        		this.firstName = firstName;
+        		this.lastName = lastName;
+        	}
+        	
+        	/*  Objects can share functionality by sharing 
+        	 *  a 'prototype' - in fact, JQuery.fn is just
+        	 *  shorthand for JQuery.prototype, which allows 
+        	 *  all of the methods available on JQuery objects
+        	 *  to be shared across objects.
+        	 */
+        	
+        	/* Modifying the prototype of Person to include a new method.
+        	 * This method will be available to all the 'Objects' that gets
+        	 * created from Person 'Object type'
+        	 */       	
+        	
+        	Person.prototype.sayFullName = function(){
+        		console.log(this.firstName + ' ' + this.lastName);
+        	}
+        	
+        	// You are not supposed to do below way, although it seems right. 
+        	// - as per Crockford video - Ultimate functions - on 21.53
+        	// http://developer.yahoo.com/yui/theater/video.php?v=crockonjs-3
+        	// But Rebecca Murphey teaches this way
+        	// http://vimeo.com/19894653
+        	/*
+         	Person.prototype = {
+        		sayFullName: function(){
+        			console.log(this.firstName + ' ' + this.lastName);
+        		}
+	        };
+        	*/
+        	        	
+        	// Creating two 'Objects' from Person 'Object type'
+        	var prab = new Person('Prabhakar', 'Doraisamy');
+        	var kom = new Person('Komal', 'Mudaliar');
+        	
+        	
+        	prab.sayFullName();
+        	kom.sayFullName();
+        	
+        	/* Methods can be changed on individual 'Objects'
+        	 * without affecting other Objects
+        	 */
+        	
+        	kom.sayFullName = function(){
+        		console.log(this.firstName + ' ' + 'Doraisamy');
+        	};
+        	
+        	prab.sayFullName();
+        	kom.sayFullName();       
+        	 	
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

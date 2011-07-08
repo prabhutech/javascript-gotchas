@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script type='text/javascript'>
+			
+			//Defining a Constructor function
+			function Animal(noOfLegs, speed){
+				this.noOfLegs = noOfLegs;
+				this.speed = speed;
+			}			
+			//and then add to the Animal prototype, the methods
+			//that we want the Animal's instances to inherit.			
+			Animal.prototype.getNoOfLegs = function(){
+				console.log(this.noOfLegs);
+			}
+			
+			//Another Constructor
+			function Herbivorous(noOfLegs, speed){
+				this.noOfLegs = noOfLegs;
+				this.speed = speed;
+			}
+			Herbivorous.prototype = new Animal();
+			Herbivorous.prototype.getSpeed = function(){
+				console.log(this.speed);
+			}
+			
+			var donkey = new Herbivorous(4, 50);
+			
+			donkey.getNoOfLegs();
+			donkey.getSpeed();
+			
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>

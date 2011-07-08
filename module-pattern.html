@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>New Web Project</title>
+		<script type="text/javascript">
+			//This is a module, which is also a singleton
+			var myModule = ( function() {
+				var privateVar ="secret";
+				var publicVar = "not secret";
+				var setSecret = function(str) {
+					privateVar = str;
+					console.log(privateVar);
+				};
+				var tellSecret = function() {
+					console.log(privateVar);
+				};
+				return {
+					publicVar: publicVar,
+					setSecret: setSecret,
+					tellSecret: tellSecret
+				};
+			}());
+			console.log(myModule.privateVar);
+			console.log(myModule.publicVar);
+			console.log(myModule.tellSecret());
+			myModule.setSecret('my new secret');
+			console.log(myModule.tellSecret());
+			
+			//This is a module inside our common Global object (used to keep all of our things inside)
+			var NOMINUM = {};
+			NOMINUM.MyModule = ( function() {
+				var privateVar ="secret";
+				var publicVar = "not secret";
+				var setSecret = function(str) {
+					privateVar = str;
+					console.log(privateVar);
+				};
+				var tellSecret = function() {
+					console.log(privateVar);
+				};
+				return {
+					publicVar: publicVar,
+					setSecret: setSecret,
+					tellSecret: tellSecret
+				};
+			}());
+			console.log(NOMINUM.myModule.privateVar);
+			console.log(NOMINUM.myModule.publicVar);
+			console.log(NOMINUM.myModule.tellSecret());
+			NOMINUM.myModule.setSecret('my new secret inside Nominum');
+			console.log(NOMINUM.myModule.tellSecret());
+			
+			//This is used to directly assign methods to our common Global object instead adding to the module
+			( function() {
+				var privateVar ="secret";
+				var publicVar = "not secret";
+				var setSecret = function(str) {
+					privateVar = str;
+					console.log(privateVar);
+				};
+				var tellSecret = function() {
+					console.log(privateVar);
+				};
+				return {
+				NOMINUM.publicVar: publicVar,
+				NOMINUM.setSecret: setSecret,
+				NOMINUM.tellSecret: tellSecret
+				};
+			}());
+			/*
+			 * Module pattern is transformed into a powerful constructor pattern
+			 * How? didn't understand that - from Crockford video
+			 */
+		</script>
+	</head>
+	<body>
+	</body>
+</html>
