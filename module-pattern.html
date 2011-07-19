@@ -28,9 +28,15 @@
 			myModule.setSecret('my new secret');
 			console.log(myModule.tellSecret());
 			
-			//This is a module inside our common Global object (used to keep all of our things inside)
-			var NOMINUM = {};
-			NOMINUM.MyModule = ( function() {
+			/*
+			 * Global namepscing - This is a module inside our common Global object 
+			 * (used to keep all of our things inside)
+			 */
+			 
+			var NOMINUM = NOMINUM || {};
+			NOMINUM.myModule = NOMINUM.myModule || {};
+
+			NOMINUM.myModule = (function() {
 				var privateVar ="secret";
 				var publicVar = "not secret";
 				var setSecret = function(str) {
@@ -46,13 +52,16 @@
 					tellSecret: tellSecret
 				};
 			}());
-			console.log(NOMINUM.myModule.privateVar);
-			console.log(NOMINUM.myModule.publicVar);
+			console.log('NOMINUM.myModule.privateVar: ' + NOMINUM.myModule.privateVar);
+			console.log('NOMINUM.myModule.publicVar: ' + NOMINUM.myModule.publicVar);
 			console.log(NOMINUM.myModule.tellSecret());
 			NOMINUM.myModule.setSecret('my new secret inside Nominum');
 			console.log(NOMINUM.myModule.tellSecret());
 			
-			//This is used to directly assign methods to our common Global object instead adding to the module
+			/*
+			 * This is used to directly assign methods to our common Global object 
+			 * instead adding to the module
+			 */
 			( function() {
 				var privateVar ="secret";
 				var publicVar = "not secret";
@@ -64,15 +73,32 @@
 					console.log(privateVar);
 				};
 				return {
-				NOMINUM.publicVar: publicVar,
-				NOMINUM.setSecret: setSecret,
-				NOMINUM.tellSecret: tellSecret
+				publicVar: publicVar,
+				setSecret: setSecret,
+				tellSecret: tellSecret
 				};
 			}());
 			/*
 			 * Module pattern is transformed into a powerful constructor pattern
 			 * How? didn't understand that - from Crockford video
 			 */
+			
+			var MYI = MYI || {};
+			MYI.myAnotherModule = function(var1, var2){
+				this.var1 = var1;
+				this.var2 = var2;
+				var getVar1 = function(){
+					console.log(this.var1);
+				}
+				return{
+					getVar1: getVar1
+				}
+			}
+			
+			var myAnotherModObj = new MYI.myAnotherModule(2, 3);
+			
+			console.log(myAnotherModObj.getVar1());
+			
 		</script>
 	</head>
 	<body>

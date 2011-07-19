@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<script type='text/javascript'>
+				
+			/*
+			 * Prototypal inheritance:
+			 * Basically we make a helper function that takes an object as a parameter 
+			 * and returns an empty new object that inherits from the old one, 'objects inherit from objects'.
+			 */			
+			// helper function
+			if (typeof Object.create !== 'function') {
+			  Object.create = function (o) {
+			    function F() {}
+			    F.prototype = o;
+			    return new F();
+			  };
+			}
+			
+			
+			var person = {
+			  sayHello : function () {
+			     alert('Person object');
+			  },
+			  walk : function () {
+			    alert('walk');
+			  }
+			};
+			
+			var student1 = Object.create(person);
+			student1.sayHello = function () {
+			  alert('hello I am a student');
+			};
+
+			
+		</script>
+	</head>
+
+	<body>
+		
+	</body>
+</html>
