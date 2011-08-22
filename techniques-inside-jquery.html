@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <script type="application/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
+
+        <script type="text/javascript">
+        
+			function foo(){
+			    console.log('foo');
+			    return function bar(){
+			    console.log('bar');
+			    };
+			}
+			
+			foo()();
+			
+			/*
+			 * This is an immediately executing anonymous function
+			 * The wrapper that encloses all the variables within that function scope
+			 * to avoid leakage of variables outside on that scope
+			 * Also, window object is passed in explicitly to have more control on what this function has access to.
+			 */
+			(function(w){
+			    console.log(foo());
+			}(window));
+			
+			/*
+			 * 'this'
+			 */
+			function nom(){
+				console.log(this.i);
+			}
+			function Nom(){
+				
+				console.log(this.i);
+			}	
+				
+			//in this case, this - refers to global scope
+			nom();
+			//in this case, this - refers to the object (n) that you are constructing
+			var n = new Nom();
+			
+			/*
+			 * So, this - mutates depending on how you CALL the function, not based on how you DECLARE the function.
+			 * this - is NOT a static declaration during function definition. 
+			 * 'this' meaning changes depending on HOW its called.
+			 * 
+			 */
+			
+			/*
+			 * Jquery itself has designed in such a way by 'protecting its scope' so it never would pollute the
+			 * global scope
+			 * Only $ sign exists on the global scope
+			 */
+			$(function(){
+			window.$('#sampleDiv').fadeOut('slow');
+			});
+			
+			/*
+			 * an anonymous function called is, in jquery's terms, a 'callback'
+			 */
+			
+			$('#btn').click(function(){ //this is a callback, or in general an anonymous fn
+				$('#infoDiv').append('clicked');
+			});
+			
+        </script>
+    </head>
+    <body>
+    	<div id="sampleDiv">fading</div>
+    </body>
+</html>
