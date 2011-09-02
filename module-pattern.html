@@ -84,20 +84,23 @@
 			 */
 			
 			var MYI = MYI || {};
-			MYI.myAnotherModule = function(var1, var2){
-				this.var1 = var1;
-				this.var2 = var2;
-				var getVar1 = function(){
-					console.log(this.var1);
+			MYI.MyContructorUsingModulePattern = (function(){
+				var counter = 0;
+				var Constructor;
+				Constructor = function(){
+					return counter += 1;
 				}
-				return{
-					getVar1: getVar1
-				}
-			}
+				Constructor.prototype.getLastId = function(){
+					return counter;
+				};
+				return Constructor;
+			}());
 			
-			var myAnotherModObj = new MYI.myAnotherModule(2, 3);
+			var objFromConstructorUsingModPattern1 = new MYI.MyContructorUsingModulePattern();
+			console.log(objFromConstructorUsingModPattern1.getLastId());
 			
-			console.log(myAnotherModObj.getVar1());
+			var objFromConstructorUsingModPattern2 = new MYI.MyContructorUsingModulePattern();
+			console.log(objFromConstructorUsingModPattern2.getLastId());
 			
 		</script>
 	</head>

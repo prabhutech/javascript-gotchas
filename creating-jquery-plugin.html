@@ -7,28 +7,65 @@
 		<script type="application/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 
 		<script type="text/javascript">
-			(function( $ ){
-	
-			  $.fn.myPlugin = function() {		
-			    // there's no need to do $(this) because
-			    // "this" is already a jquery object
-			
-			    // $(this) would be the same as $($('#element'));			        
-			    this.live('focus', function(){			
-			      // the this keyword is a DOM element
-					console.log('focussed');
-			    });
-			
-			  };
-			})( jQuery );
-			
-			$(document).ready( function() {
-				$('#searchinput').myPlugin();
+		//1.----------------------------------------------
+		//the crude way of creating a Jquery plugin
+		$.fn.myCrudePlugin = function(){
+			console.log('this is my crude plugin');
+		};		
+		//-----------------------------------------------
+		//2.---------------------------------------------
+		//Using best practice to create Jquery plugin
+		/*
+		 * encapsulating the extension in the module pattern,
+		 * which prevents any scope leaks and variable conflicts
+		 */		
+		(function( $ ){
+			//$.fn is equal to JQuery.prototype
+		  $.fn.myPlugin = function() {		
+		    // there's no need to do $(this) because
+		    // "this" is already a jquery object		
+		    // $(this) would be the same as $($('#element'));			        
+		    this.live('focus', function(){			
+		      // the this keyword is a DOM element
+				console.log('focussed');
+		    });
+		
+		  };
+		})( jQuery );
+		//---------------------------------------------------
+		//3.---------------------------------------------
+		//A simple tooltip plugin		
+		(function( $ ){
+		  $.fn.tooltip = function(arg) {					        
+			this.live("mouseover mouseout", function(event) {
+			  if ( event.type == "mouseover" ) {
+			    // do something on mouseover
+			    console.log(event.type);
+			    var position = this.position();
+			    $('#tooltip').html(arg).css('position', 'absolute').position(position.top, position.left).show();
+			  } else {
+			    // do something on mouseout
+			    console.log(event.type);
+			    $('#tooltip').html('').hide();
+			  }
+			});	
+			$(document).ready(function(){
+				$('body').append('<div id="tooltip" style="background-color:yellow;display:none"></div>');
 			});
+		  };
+		})( jQuery );
+		//---------------------------------------------------		
+		
+		$(document).ready( function() {		
+			$('#divId').myCrudePlugin();
+			$('#searchinput').myPlugin();
+			$('#divWithTooltip').tooltip('hi there');
+		});
 
 		</script>
 	</head>
 	<body>
+		<div id="divWithTooltip">Content</div>
 		<input type="text" id="searchinput" />
 	</body>
 </html>

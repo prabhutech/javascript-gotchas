@@ -6,8 +6,14 @@
         	
         	// Defining a Constructor function to create Person 'Object type'
         	var Person = function(firstName, lastName){
+        		//public properties
         		this.firstName = firstName;
         		this.lastName = lastName;
+        		//private properties
+        		var city = 2;
+        		var getFullName = function(){
+        			return firstName + ' ' + lastName;
+        		}
         	}
         	
         	/*  Objects can share functionality by sharing 
@@ -22,8 +28,15 @@
         	 * created from Person 'Object type'
         	 */       	
         	
+        	//public property (method) set using Prototype (this style is used to avoid recreation of members 
+        	// every time the constructor is invoked to create an object.)
         	Person.prototype.sayFullName = function(){
         		console.log(this.firstName + ' ' + this.lastName);
+        	}
+        	
+        	//static method        	
+        	Person.hasTwoLegs = function(){
+        		return 'you bet';
         	}
         	
         	// You are not supposed to do below way, although it seems right. 
