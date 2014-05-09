@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <script type="text/javascript">
+
+
+
+    //Example 1
+
+    /* Simple Example to explain 'call' & 'apply' */
+
+    var obj1 = {
+        name: 'Benjamin',
+        greet: function(name, place) {
+            alert(this.name + ' says hello in ' + place);
+        }
+    };
+
+    var obj2 = {
+        name: 'Dora'
+    };
+
+    /* Everything in JS is an object, including functions.
+    Since any object can have method on it, functions can have methods as well.
+
+    In this case, greet function has a method called, 'call'.
+    'call' allows you to call 'greet' method on a different object.
+    */
+
+    //We are calling 'greet' method of obj1 on the object obj2.
+    //'this' used inside 'greet' method helps refers to respective objects.
+
+    //Difference between 'call' & 'apply' is the way how they take the arguments inside.
+    //'call' takes arguments as arguments.
+    //'apply' takes arguments as array.
+    obj1.greet.call(obj2, 'Dora', 'Palo Alto');
+    obj1.greet.apply(obj2, ['Dora', 'Palo Alto']);
+
+
+
+    //Example 2
+
+    /* Another practical example:  Shows how 'apply' can be used to increase performance instead of looping */
+
+    //Preparing a huge array to experiment.
+    var array = [];
+    var j = 100000;
+    while (j--) {
+        array.push(j);
+    }
+
+    //Two empty arrays to compare
+    var array1 = [];
+    var array2 = [];
+
+    //Using standard 'for' loop to push the 'array' elements to 'array1'
+    d1 = +new Date();
+    for (i = 0; i < array.length; i++) {
+        array1.push(array[i])
+    }
+    d2 = +new Date();
+
+    //Using 'apply' method to make use of Array's push method on 'array2'
+    d3 = +new Date();
+    Array.prototype.push.apply(array2, array);
+    d4 = +new Date();
+
+    timeToPushToArray1 = d2 - d1;
+    timeToPushToArray2 = d4 - d3;
+
+    //time2 is less than time1
+    document.write('Time taken to push an array to array1: ' + timeToPushToArray1 + 'msecs. ');
+    document.write('Time taken to push an array to array2: ' + timeToPushToArray2 + 'msecs');
+
+
+
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>
