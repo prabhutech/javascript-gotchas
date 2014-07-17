@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <script type='text/javascript'>
+   /*
+	This is to demo how to create private method inside class and have the reference bound to the class.
+	There are 3 ways you can do that.
+	*/
+
+   /* Approach 1 */
+   function City(numOfPeople) {
+      var that = this; //'That' is created and consumed by calcHouseHolds later during execution.
+      this.numOfPeople = numOfPeople;
+      var divisor = 3;
+      var calcHouseHolds = function() {
+         return that.numOfPeople / divisor;
+      };
+      this.getHouseHolds = function() {
+         return calcHouseHolds();
+      };
+   }
+   var lansing = new City(110000);
+   console.log(lansing.getHouseHolds());
+
+
+   /* Approach 2 */
+   function City(numOfPeople) {
+      this.numOfPeople = numOfPeople;
+      var divisor = 3;
+      var calcHouseHolds = function() {
+         return this.numOfPeople / divisor;
+      };
+      this.getHouseHolds = function() {
+         return calcHouseHolds.call(this); //Using 'call' to execute the calcHouseHolds method with 'this' as context.
+      };
+   }
+   var lansing = new City(110000);
+   console.log(lansing.getHouseHolds());
+
+
+   /* Approach 1 */
+   function City(numOfPeople) {
+      this.numOfPeople = numOfPeople;
+      var divisor = 3;
+      var calcHouseHolds = function() {
+         return this.numOfPeople / divisor;
+      }.bind(this); //Using 'bind' when creating the calcHouseHolds method, so it always executes with 'this' context.
+      this.getHouseHolds = function() {
+         return calcHouseHolds();
+      };
+   }
+   var lansing = new City(110000);
+   console.log(lansing.getHouseHolds());
+
+
+   </script>
+</head>
+<body>
+</body>
+</html>
