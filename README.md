@@ -1,5 +1,12 @@
-## Javascript Gotchas
+
+Javascript Gotchas
+==================
+
+------
+
+### Introduction
 * This repo explains basic concepts of Javascript, its features and quirkiness. Hope it helps.
+
 ------
 
 ### Concepts covered
@@ -8,11 +15,11 @@
 * objects
 * prototype
 * inheritance
-** Prototypal Inheritance
-** Pseudoclassical Inheritance
+ * Prototypal Inheritance
+ * Pseudoclassical Inheritance
 * Patterns
-** Module Pattern
-** Pub-sub Pttern
+ * Module Pattern
+ * Pub-sub Pttern
 * Introduction to Unit testing (using QUnit)
 * Namespacing
 * 'this' keyword
@@ -21,3 +28,5 @@
 * call & apply methods
 * bind method
 * Techniques used inside JQuery library.
+
+------
