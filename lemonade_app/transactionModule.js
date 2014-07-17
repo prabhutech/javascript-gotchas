@@ -25,6 +25,12 @@ transactionModule = (function() {
       }
    };
 
+   var clearCart = function() {
+      for (var i = 0; i < items.length; i++) {
+            items[i].quantity = 0;
+      }
+   };
+
    var getTotalCost = function() {
       var totalCost = 0;
       for (var i = 0; i < items.length; i++) {
@@ -36,7 +42,8 @@ transactionModule = (function() {
    return {
       setItemCost: setItemCost,
       items: items,
-      getTotalCost: getTotalCost
+      getTotalCost: getTotalCost,
+      clearCart: clearCart
    }
 
 }());

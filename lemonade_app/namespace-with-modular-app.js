@@ -38,7 +38,7 @@ LEMON.Marketting = (function(w, transactionModule, $) {
    };
 
    return {
-      promptFavoritePick: promptPopup,
+      promptFavoritePick: promptPopup, //dummy method to showcase below concept
       init: init
    }
 
