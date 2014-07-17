@@ -2,12 +2,9 @@
 Javascript Gotchas
 ==================
 
-------
-
 ### Introduction
 * This repo explains basic concepts of Javascript, its features and quirkiness. Hope it helps.
 
-------
 
 ### Concepts covered
 * context
