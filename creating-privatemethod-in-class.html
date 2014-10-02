@@ -8,19 +8,29 @@
 	*/
 
    /* Approach 1 */
-   function City(numOfPeople) {
-      var that = this; //'That' is created and consumed by calcHouseHolds later during execution.
-      this.numOfPeople = numOfPeople;
-      var divisor = 3;
-      var calcHouseHolds = function() {
-         return that.numOfPeople / divisor;
-      };
-      this.getHouseHolds = function() {
-         return calcHouseHolds();
-      };
-   }
+	function City(numOfPeople) {
+	      var that = this; //'That' is created and consumed by calcHouseHolds later during execution.
+	      this.numOfPeople = numOfPeople;
+	      var divisor = 3;
+	      var calcHouseHolds1 = function() {
+	          //that
+	         return that.numOfPeople / divisor;
+	      };
+	      var calcHouseHolds2 = function() {
+	          //this
+	         return this.numOfPeople / divisor;
+	      };
+	    this.getHouseHolds1 = function() {
+	         return calcHouseHolds1();
+	      };
+	    this.getHouseHolds2 = function() {
+	         return calcHouseHolds2();
+	      };
+	}
    var lansing = new City(110000);
-   console.log(lansing.getHouseHolds());
+   console.log(lansing.getHouseHolds1());
+   console.log(lansing.getHouseHolds2()); //This gives NaN
+
 
 
    /* Approach 2 */
